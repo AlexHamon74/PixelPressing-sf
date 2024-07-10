@@ -107,8 +107,19 @@ class AppFixtures extends Fixture
             ->setAdress('26 rue victor hugo')
             ->setGender('Madame');
 
+        $employeeUser = new User();
+        $employeeUser->setEmail('employee@test.com')
+            ->setRoles(['ROLE_EMPLOYEE'])
+            ->setPassword('employee1234')
+            ->setName('Test')
+            ->setFirstname('Employee')
+            ->setBirthdate(new \DateTime)
+            ->setAdress('42 avenue Charles de gaulle')
+            ->setGender('Madame');
+
         $manager->persist($regularUser);
         $manager->persist($adminUser);
+        $manager->persist($employeeUser);
 
 
         //Tableau pour stocker les catégories
