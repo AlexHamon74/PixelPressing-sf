@@ -15,12 +15,12 @@ class AppFixtures extends Fixture
         [
             'name' => 'Pressing',
             'description' => "Découvrez notre pressing de qualité, spécialisé dans le nettoyage à sec et le soin méticuleux de vos vêtements. Repassage impeccable, réparations expertes et service clientèle attentionné pour préserver l'élégance et la durabilité de vos tenues favorites.",
-            'image' => 'test'
+            'image' => 'iconePressing.png'
         ],
         [
             'name' => 'Blanchisserie',
             'description' => "Explorez notre blanchisserie professionnelle, dédiée au lavage et à l'entretien soigneux de votre linge de maison. Propreté optimale garantie pour draps, serviettes et nappes, adaptée aux besoins domestiques et professionnels. Fiable, efficace et orienté client pour répondre à vos attentes les plus exigeantes.",
-            'image' => 'test'
+            'image' => 'iconeBlanchisserie.png'
         ]
     ];
     private const SERVICES = [
