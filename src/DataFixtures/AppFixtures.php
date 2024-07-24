@@ -37,12 +37,6 @@ class AppFixtures extends Fixture
             'price' => 2
         ],
         [
-            'name' => 'Nettoyage à sec',
-            'description' => "Nous offrons un service de nettoyage à sec de qualité supérieure pour vos vêtements délicats. Grâce à des solvants spécialisés, nous éliminons les saletés et les taches sans abîmer les tissus les plus fragiles. Vos vêtements retrouveront leur éclat et leur fraîcheur d’origine.",
-            'image' => 'test',
-            'price' => 6
-        ],
-        [
             'name' => 'Traitement des tâches',
             'description' => "Ne laissez pas les taches gâcher vos vêtements préférés. Nos experts en traitement des taches utilisent des techniques avancées pour éliminer les taches les plus difficiles, qu’il s’agisse de vin, de graisse ou d’encre. Nous prenons soin de chaque vêtement pour un résultat impeccable et durable.",
             'image' => 'test',
@@ -95,7 +89,7 @@ class AppFixtures extends Fixture
             ->setFirstname('Bob')
             ->setBirthdate(new \DateTime)
             ->setAdress('18 rue des potiers')
-            ->setGender('Monsieur');
+            ->setGender('Mr');
 
         $adminUser = new User();
         $adminUser->setEmail('admin@test.com')
@@ -105,7 +99,7 @@ class AppFixtures extends Fixture
             ->setFirstname('Admin')
             ->setBirthdate(new \DateTime)
             ->setAdress('26 rue victor hugo')
-            ->setGender('Madame');
+            ->setGender('Mme');
 
         $employeeUser = new User();
         $employeeUser->setEmail('employee@test.com')
@@ -115,7 +109,7 @@ class AppFixtures extends Fixture
             ->setFirstname('Employee')
             ->setBirthdate(new \DateTime)
             ->setAdress('42 avenue Charles de gaulle')
-            ->setGender('Madame');
+            ->setGender('Mme');
 
         $manager->persist($regularUser);
         $manager->persist($adminUser);
