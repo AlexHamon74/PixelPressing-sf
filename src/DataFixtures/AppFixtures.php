@@ -25,18 +25,6 @@ class AppFixtures extends Fixture
     ];
     private const SERVICES = [
         [
-            'name' => 'Lavage',
-            'description' => "Offrez à vos vêtements un lavage professionnel et soigné. Nous utilisons des machines de pointe et des détergents de haute qualité pour garantir un nettoyage en profondeur tout en préservant les fibres et les couleurs de vos vêtements. Votre linge ressortira frais, propre et doux au toucher.",
-            'image' => 'test',
-            'price' => 2
-        ],
-        [
-            'name' => 'Repassage',
-            'description' => "Confiez-nous vos vêtements pour un repassage impeccable. Nos experts maîtrisent les techniques de repassage pour éliminer tous les plis, même les plus tenaces, et redonner à vos vêtements une allure nette et soignée. Vous profiterez d’un gain de temps considérable et d’un rendu impeccable.",
-            'image' => 'test',
-            'price' => 2
-        ],
-        [
             'name' => 'Traitement des tâches',
             'description' => "Ne laissez pas les taches gâcher vos vêtements préférés. Nos experts en traitement des taches utilisent des techniques avancées pour éliminer les taches les plus difficiles, qu’il s’agisse de vin, de graisse ou d’encre. Nous prenons soin de chaque vêtement pour un résultat impeccable et durable.",
             'image' => 'test',
@@ -52,26 +40,26 @@ class AppFixtures extends Fixture
     private const ITEMS = [
         [
             'name' => 'Chemise',
-            'image' => 'test',
-            'price' => 2,
+            'image' => 'skirt.png',
+            'price' => 6,
             'category' => 'Pressing'
         ],
         [
             'name' => 'Pantalon',
-            'image' => 'test',
-            'price' => 4,
+            'image' => 'jean.png',
+            'price' => 8,
             'category' => 'Pressing'
         ],
         [
-            'name' => 'Drap',
-            'image' => 'test',
-            'price' => 8,
+            'name' => 'Tapis',
+            'image' => 'tapis.png',
+            'price' => 10,
             'category' => 'Blanchisserie'
         ],
         [
             'name' => 'Couette',
-            'image' => 'test',
-            'price' => 15,
+            'image' => 'couette.png',
+            'price' => 18,
             'category' => 'Blanchisserie'
         ]
     ];
