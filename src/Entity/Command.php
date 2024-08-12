@@ -4,8 +4,7 @@ namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
 use App\Repository\CommandRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CommandRepository::class)]
@@ -18,38 +17,33 @@ class Command
     private ?int $id = null;
 
     #[ORM\Column]
-    private ?\DateTimeImmutable $createdAt = null;
+    private ?float $price = null;
 
     #[ORM\Column(length: 255)]
     private ?string $status = null;
 
+    #[ORM\Column]
+    private ?bool $delivery = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $delivery_date = null;
+
     #[ORM\ManyToOne(inversedBy: 'commands')]
     private ?User $user = null;
-
-    /**
-     * @var Collection<int, CommandItem>
-     */
-    #[ORM\OneToMany(targetEntity: CommandItem::class, mappedBy: 'command')]
-    private Collection $command_items;
-
-    public function __construct()
-    {
-        $this->command_items = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getCreatedAt(): ?\DateTimeImmutable
+    public function getPrice(): ?float
     {
-        return $this->createdAt;
+        return $this->price;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $createdAt): static
+    public function setPrice(float $price): static
     {
-        $this->createdAt = $createdAt;
+        $this->price = $price;
 
         return $this;
     }
@@ -66,6 +60,30 @@ class Command
         return $this;
     }
 
+    public function isDelivery(): ?bool
+    {
+        return $this->delivery;
+    }
+
+    public function setDelivery(bool $delivery): static
+    {
+        $this->delivery = $delivery;
+
+        return $this;
+    }
+
+    public function getDeliveryDate(): ?\DateTimeInterface
+    {
+        return $this->delivery_date;
+    }
+
+    public function setDeliveryDate(\DateTimeInterface $delivery_date): static
+    {
+        $this->delivery_date = $delivery_date;
+
+        return $this;
+    }
+
     public function getUser(): ?User
     {
         return $this->user;
@@ -74,36 +92,6 @@ class Command
     public function setUser(?User $user): static
     {
         $this->user = $user;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, CommandItem>
-     */
-    public function getCommandItems(): Collection
-    {
-        return $this->command_items;
-    }
-
-    public function addCommandItem(CommandItem $commandItem): static
-    {
-        if (!$this->command_items->contains($commandItem)) {
-            $this->command_items->add($commandItem);
-            $commandItem->setCommand($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCommandItem(CommandItem $commandItem): static
-    {
-        if ($this->command_items->removeElement($commandItem)) {
-            // set the owning side to null (unless already changed)
-            if ($commandItem->getCommand() === $this) {
-                $commandItem->setCommand(null);
-            }
-        }
 
         return $this;
     }

@@ -4,8 +4,6 @@ namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
 use App\Repository\ItemRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -32,27 +30,9 @@ class Item
     #[Groups(['item:read'])]
     private ?int $price = null;
 
-    /**
-     * @var Collection<int, CommandItem>
-     */
-    #[ORM\OneToMany(targetEntity: CommandItem::class, mappedBy: 'item')]
-    private Collection $item;
-
-    #[ORM\ManyToOne(inversedBy: 'category')]
+    #[ORM\ManyToOne(inversedBy: 'items')]
     #[Groups(['item:read'])]
     private ?Category $category = null;
-
-    /**
-     * @var Collection<int, ItemService>
-     */
-    #[ORM\OneToMany(targetEntity: ItemService::class, mappedBy: 'item')]
-    private Collection $items_service;
-
-    public function __construct()
-    {
-        $this->item = new ArrayCollection();
-        $this->items_service = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -95,36 +75,6 @@ class Item
         return $this;
     }
 
-    /**
-     * @return Collection<int, CommandItem>
-     */
-    public function getItem(): Collection
-    {
-        return $this->item;
-    }
-
-    public function addItem(CommandItem $item): static
-    {
-        if (!$this->item->contains($item)) {
-            $this->item->add($item);
-            $item->setItem($this);
-        }
-
-        return $this;
-    }
-
-    public function removeItem(CommandItem $item): static
-    {
-        if ($this->item->removeElement($item)) {
-            // set the owning side to null (unless already changed)
-            if ($item->getItem() === $this) {
-                $item->setItem(null);
-            }
-        }
-
-        return $this;
-    }
-
     public function getCategory(): ?Category
     {
         return $this->category;
@@ -133,36 +83,6 @@ class Item
     public function setCategory(?Category $category): static
     {
         $this->category = $category;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, ItemService>
-     */
-    public function getItemsService(): Collection
-    {
-        return $this->items_service;
-    }
-
-    public function addItemsService(ItemService $itemsService): static
-    {
-        if (!$this->items_service->contains($itemsService)) {
-            $this->items_service->add($itemsService);
-            $itemsService->setItem($this);
-        }
-
-        return $this;
-    }
-
-    public function removeItemsService(ItemService $itemsService): static
-    {
-        if ($this->items_service->removeElement($itemsService)) {
-            // set the owning side to null (unless already changed)
-            if ($itemsService->getItem() === $this) {
-                $itemsService->setItem(null);
-            }
-        }
 
         return $this;
     }

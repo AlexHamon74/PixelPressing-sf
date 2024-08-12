@@ -8,7 +8,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Serializer\Attribute\Groups;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
 #[ApiResource()]
@@ -34,11 +34,11 @@ class Category
      * @var Collection<int, Item>
      */
     #[ORM\OneToMany(targetEntity: Item::class, mappedBy: 'category')]
-    private Collection $category;
+    private Collection $items;
 
     public function __construct()
     {
-        $this->category = new ArrayCollection();
+        $this->items = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -85,27 +85,27 @@ class Category
     /**
      * @return Collection<int, Item>
      */
-    public function getCategory(): Collection
+    public function getItems(): Collection
     {
-        return $this->category;
+        return $this->items;
     }
 
-    public function addCategory(Item $category): static
+    public function addItem(Item $item): static
     {
-        if (!$this->category->contains($category)) {
-            $this->category->add($category);
-            $category->setCategory($this);
+        if (!$this->items->contains($item)) {
+            $this->items->add($item);
+            $item->setCategory($this);
         }
 
         return $this;
     }
 
-    public function removeCategory(Item $category): static
+    public function removeItem(Item $item): static
     {
-        if ($this->category->removeElement($category)) {
+        if ($this->items->removeElement($item)) {
             // set the owning side to null (unless already changed)
-            if ($category->getCategory() === $this) {
-                $category->setCategory(null);
+            if ($item->getCategory() === $this) {
+                $item->setCategory(null);
             }
         }
 

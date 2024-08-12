@@ -4,8 +4,6 @@ namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
 use App\Repository\ServiceRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -29,24 +27,6 @@ class Service
 
     #[ORM\Column]
     private ?int $price = null;
-
-    /**
-     * @var Collection<int, CommandItem>
-     */
-    #[ORM\OneToMany(targetEntity: CommandItem::class, mappedBy: 'service')]
-    private Collection $service;
-
-    /**
-     * @var Collection<int, ItemService>
-     */
-    #[ORM\OneToMany(targetEntity: ItemService::class, mappedBy: 'service')]
-    private Collection $itemServices;
-
-    public function __construct()
-    {
-        $this->service = new ArrayCollection();
-        $this->itemServices = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -97,66 +77,6 @@ class Service
     public function setPrice(int $price): static
     {
         $this->price = $price;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, CommandItem>
-     */
-    public function getService(): Collection
-    {
-        return $this->service;
-    }
-
-    public function addService(CommandItem $service): static
-    {
-        if (!$this->service->contains($service)) {
-            $this->service->add($service);
-            $service->setService($this);
-        }
-
-        return $this;
-    }
-
-    public function removeService(CommandItem $service): static
-    {
-        if ($this->service->removeElement($service)) {
-            // set the owning side to null (unless already changed)
-            if ($service->getService() === $this) {
-                $service->setService(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, ItemService>
-     */
-    public function getItemServices(): Collection
-    {
-        return $this->itemServices;
-    }
-
-    public function addItemService(ItemService $itemService): static
-    {
-        if (!$this->itemServices->contains($itemService)) {
-            $this->itemServices->add($itemService);
-            $itemService->setService($this);
-        }
-
-        return $this;
-    }
-
-    public function removeItemService(ItemService $itemService): static
-    {
-        if ($this->itemServices->removeElement($itemService)) {
-            // set the owning side to null (unless already changed)
-            if ($itemService->getService() === $this) {
-                $itemService->setService(null);
-            }
-        }
 
         return $this;
     }
