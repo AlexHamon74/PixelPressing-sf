@@ -10,6 +10,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: CommandRepository::class)]
 #[ApiResource(normalizationContext:['groups' => ['command:read']])]
+
 class Command
 {
     #[ORM\Id]
@@ -20,7 +21,7 @@ class Command
 
     #[ORM\Column]
     #[Groups(['command:read'])]
-    private ?float $price = null;
+    private ?int $price = null;
 
     #[ORM\Column(length: 255)]
     #[Groups(['command:read'])]
@@ -30,29 +31,33 @@ class Command
     #[Groups(['command:read'])]
     private ?bool $delivery = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     #[Groups(['command:read'])]
-    private ?\DateTimeInterface $delivery_date = null;
+    private ?\DateTimeInterface $deliveryDate = null;
+
+    #[ORM\Column]
+    #[Groups(['command:read'])]
+    private array $commandItems = [];
+
+    #[ORM\Column]
+    #[Groups(['command:read'])]
+    private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\ManyToOne(inversedBy: 'commands')]
     #[Groups(['command:read'])]
     private ?User $user = null;
-
-    #[ORM\Column]
-    #[Groups(['command:read'])]
-    private array $command_items = [];
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getPrice(): ?float
+    public function getPrice(): ?int
     {
         return $this->price;
     }
 
-    public function setPrice(float $price): static
+    public function setPrice(int $price): static
     {
         $this->price = $price;
 
@@ -83,14 +88,38 @@ class Command
         return $this;
     }
 
-    public function getdelivery_date(): ?\DateTimeInterface
+    public function getDeliveryDate(): ?\DateTimeInterface
     {
-        return $this->delivery_date;
+        return $this->deliveryDate;
     }
 
-    public function setdelivery_date(\DateTimeInterface $delivery_date): static
+    public function setDeliveryDate(?\DateTimeInterface $deliveryDate): static
     {
-        $this->delivery_date = $delivery_date;
+        $this->deliveryDate = $deliveryDate;
+
+        return $this;
+    }
+
+    public function getCommandItems(): array
+    {
+        return $this->commandItems;
+    }
+
+    public function setCommandItems(array $commandItems): static
+    {
+        $this->commandItems = $commandItems;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeImmutable $createdAt): static
+    {
+        $this->createdAt = $createdAt;
 
         return $this;
     }
@@ -103,18 +132,6 @@ class Command
     public function setUser(?User $user): static
     {
         $this->user = $user;
-
-        return $this;
-    }
-
-    public function getcommand_items(): array
-    {
-        return $this->command_items;
-    }
-
-    public function setcommand_items(array $command_items): static
-    {
-        $this->command_items = $command_items;
 
         return $this;
     }

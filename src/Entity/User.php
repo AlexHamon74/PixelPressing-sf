@@ -57,9 +57,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $gender = null;
 
     /**
-     * @var Collection<int, Command>
+     * @var Collection<int, command>
      */
-    #[ORM\OneToMany(targetEntity: Command::class, mappedBy: 'user')]
+    #[ORM\OneToMany(targetEntity: command::class, mappedBy: 'user')]
     private Collection $commands;
 
     public function __construct()
@@ -203,14 +203,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @return Collection<int, Command>
+     * @return Collection<int, command>
      */
     public function getCommands(): Collection
     {
         return $this->commands;
     }
 
-    public function addCommand(Command $command): static
+    public function addCommand(command $command): static
     {
         if (!$this->commands->contains($command)) {
             $this->commands->add($command);
@@ -220,7 +220,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function removeCommand(Command $command): static
+    public function removeCommand(command $command): static
     {
         if ($this->commands->removeElement($command)) {
             // set the owning side to null (unless already changed)
