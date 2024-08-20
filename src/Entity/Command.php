@@ -6,7 +6,9 @@ use ApiPlatform\Metadata\ApiResource;
 use App\Repository\CommandRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Context;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 
 #[ORM\Entity(repositoryClass: CommandRepository::class)]
 #[ApiResource(normalizationContext:['groups' => ['command:read']])]
@@ -32,6 +34,7 @@ class Command
     private ?bool $delivery = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    #[Context(normalizationContext: [DateTimeNormalizer::FORMAT_KEY => 'd/m/Y H:i:s'])]
     #[Groups(['command:read'])]
     private ?\DateTimeInterface $deliveryDate = null;
 
@@ -41,6 +44,7 @@ class Command
 
     #[ORM\Column]
     #[Groups(['command:read'])]
+    #[Context(normalizationContext: [DateTimeNormalizer::FORMAT_KEY => 'd/m/Y H:i:s'])]
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\ManyToOne(inversedBy: 'commands')]

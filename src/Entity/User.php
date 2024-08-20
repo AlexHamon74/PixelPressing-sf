@@ -11,6 +11,9 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Annotation\Context;
+
+use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
@@ -51,6 +54,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $adress = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Context(normalizationContext: [DateTimeNormalizer::FORMAT_KEY => 'd/m/Y'])]
     private ?\DateTimeInterface $birthdate = null;
 
     #[ORM\Column(length: 255)]
