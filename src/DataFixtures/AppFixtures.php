@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Category;
+use App\Entity\Employee;
 use App\Entity\Item;
 use App\Entity\Service;
 use App\Entity\User;
@@ -68,7 +69,7 @@ class AppFixtures extends Fixture
     {
         $generator = \Faker\Factory::create();
 
-        // Ajout des Users
+        // Ajout d'un user
         $regularUser = new User();
         $regularUser->setEmail('bob@test.com')
             ->setRoles(['ROLE_USER'])
@@ -79,6 +80,7 @@ class AppFixtures extends Fixture
             ->setAdress('18 rue des potiers')
             ->setGender('Mr');
 
+        // Ajout d'un admin
         $adminUser = new User();
         $adminUser->setEmail('admin@test.com')
             ->setRoles(['ROLE_ADMIN'])
@@ -89,8 +91,10 @@ class AppFixtures extends Fixture
             ->setAdress('26 rue victor hugo')
             ->setGender('Mme');
 
-        $employeeUser = new User();
-        $employeeUser->setEmail('employee@test.com')
+
+        //Ajout d'un employee
+        $employee = new Employee();
+        $employee->setEmail('employee@test.com')
             ->setRoles(['ROLE_EMPLOYEE'])
             ->setPassword('employee1234')
             ->setName('Test')
@@ -101,7 +105,7 @@ class AppFixtures extends Fixture
 
         $manager->persist($regularUser);
         $manager->persist($adminUser);
-        $manager->persist($employeeUser);
+        $manager->persist($employee);
 
 
         //Tableau pour stocker les catégories

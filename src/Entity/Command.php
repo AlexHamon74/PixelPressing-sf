@@ -11,7 +11,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 
 #[ORM\Entity(repositoryClass: CommandRepository::class)]
-#[ApiResource(normalizationContext:['groups' => ['command:read']])]
+#[ApiResource(normalizationContext: ['groups' => ['command:read']])]
 
 class Command
 {
@@ -50,6 +50,10 @@ class Command
     #[ORM\ManyToOne(inversedBy: 'commands')]
     #[Groups(['command:read'])]
     private ?User $user = null;
+
+    #[ORM\ManyToOne(inversedBy: 'commands')]
+    #[Groups(['command:read'])]
+    private ?Employee $employee = null;
 
     public function getId(): ?int
     {
@@ -136,6 +140,18 @@ class Command
     public function setUser(?User $user): static
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getEmployee(): ?Employee
+    {
+        return $this->employee;
+    }
+
+    public function setEmployee(?Employee $employee): static
+    {
+        $this->employee = $employee;
 
         return $this;
     }

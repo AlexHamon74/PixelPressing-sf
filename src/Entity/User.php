@@ -17,6 +17,9 @@ use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
+#[ORM\InheritanceType("JOINED")]
+#[ORM\DiscriminatorColumn(name: "discr", type: "string")]
+#[ORM\DiscriminatorMap(["user" => User::class, "employee" => Employee::class])]
 #[ApiResource()]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
