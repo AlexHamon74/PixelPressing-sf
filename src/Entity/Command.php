@@ -33,8 +33,8 @@ class Command
     #[Groups(['command:read'])]
     private ?bool $delivery = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    #[Context(normalizationContext: [DateTimeNormalizer::FORMAT_KEY => 'd/m/Y H:i:s'])]
+    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
+    #[Context(normalizationContext: [DateTimeNormalizer::FORMAT_KEY => 'd/m/Y'])]
     #[Groups(['command:read'])]
     private ?\DateTimeInterface $deliveryDate = null;
 
@@ -42,16 +42,16 @@ class Command
     #[Groups(['command:read'])]
     private array $commandItems = [];
 
-    #[ORM\Column]
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
     #[Groups(['command:read'])]
-    #[Context(normalizationContext: [DateTimeNormalizer::FORMAT_KEY => 'd/m/Y H:i:s'])]
-    private ?\DateTimeImmutable $createdAt = null;
+    #[Context(normalizationContext: [DateTimeNormalizer::FORMAT_KEY => 'd/m/Y'])]
+    private ?\DateTimeInterface $createdAt = null;
 
     #[ORM\ManyToOne(inversedBy: 'commands')]
     #[Groups(['command:read'])]
     private ?User $user = null;
 
-    #[ORM\ManyToOne(inversedBy: 'commands')]
+    #[ORM\ManyToOne(targetEntity: Employee::class, inversedBy: 'commands', fetch: 'EAGER')]
     #[Groups(['command:read'])]
     private ?Employee $employee = null;
 
@@ -120,12 +120,12 @@ class Command
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeImmutable
+    public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $createdAt): static
+    public function setCreatedAt(\DateTimeInterface $createdAt): static
     {
         $this->createdAt = $createdAt;
 

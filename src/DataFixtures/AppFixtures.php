@@ -15,51 +15,51 @@ class AppFixtures extends Fixture
     private const CATEGORIES = [
         [
             'name' => 'Pressing',
-            'description' => "Découvrez notre pressing de qualité, spécialisé dans le nettoyage à sec et le soin méticuleux de vos vêtements. Repassage impeccable, réparations expertes et service clientèle attentionné pour préserver l'élégance et la durabilité de vos tenues favorites.",
-            'image' => 'iconePressing.png'
+            'description' => "Découvrez notre pressing de qualité, spécialisé dans le nettoyage à sec et le soin méticuleux de vos vêtements. Repassage impeccable, réparations expertes et service clientèle attentionné.",
+            'image' => 'iconePressing.webp'
         ],
         [
             'name' => 'Blanchisserie',
-            'description' => "Explorez notre blanchisserie professionnelle, dédiée au lavage et à l'entretien soigneux de votre linge de maison. Propreté optimale garantie pour draps, serviettes et nappes, adaptée aux besoins domestiques et professionnels. Fiable, efficace et orienté client pour répondre à vos attentes les plus exigeantes.",
-            'image' => 'iconeBlanchisserie.png'
+            'description' => "Explorez notre blanchisserie professionnelle, dédiée au lavage et à l'entretien soigneux de votre linge de maison. Propreté optimale garantie pour draps, serviettes et nappes, adaptée aux besoins domestiques et professionnels.",
+            'image' => 'iconeBlanchisserie.webp'
         ]
     ];
     private const SERVICES = [
         [
             'name' => 'Traitement des tâches',
             'description' => "Ne laissez pas les taches gâcher vos vêtements préférés. Nos experts en traitement des taches utilisent des techniques avancées pour éliminer les taches les plus difficiles, qu’il s’agisse de vin, de graisse ou d’encre. Nous prenons soin de chaque vêtement pour un résultat impeccable et durable.",
-            'image' => 'test',
+            'image' => 'detachage.webp',
             'price' => 3
         ],
         [
             'name' => 'Réparations et retouches',
             'description' => "Notre service de réparation et retouches offre des ajustements précis pour tous types de vêtements, remplace les boutons, et répare les déchirures avec soin. Nous veillons à ce que vos vêtements vous vont parfaitement et restent en parfait état, prolongeant ainsi leur durabilité et votre satisfaction.",
-            'image' => 'test',
-            'price' => 3
+            'image' => 'retouche.webp',
+            'price' => 4
         ]
     ];
     private const ITEMS = [
         [
             'name' => 'Chemise',
-            'image' => 'skirt.png',
+            'image' => 'skirt.webp',
             'price' => 6,
             'category' => 'Pressing'
         ],
         [
             'name' => 'Pantalon',
-            'image' => 'jean.png',
+            'image' => 'jean.webp',
             'price' => 8,
             'category' => 'Pressing'
         ],
         [
             'name' => 'Tapis',
-            'image' => 'tapis.png',
+            'image' => 'tapis.webp',
             'price' => 10,
             'category' => 'Blanchisserie'
         ],
         [
             'name' => 'Couette',
-            'image' => 'couette.png',
+            'image' => 'couette.webp',
             'price' => 18,
             'category' => 'Blanchisserie'
         ]

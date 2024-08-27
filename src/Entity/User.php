@@ -26,10 +26,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['command:read'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 180)]
-    #[Groups(['command:read'])]
     private ?string $email = null;
 
     /**
@@ -53,7 +53,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $firstname = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['command:read'])]
     private ?string $adress = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
