@@ -20,52 +20,59 @@ use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 #[ORM\InheritanceType("JOINED")]
 #[ORM\DiscriminatorColumn(name: "discr", type: "string")]
 #[ORM\DiscriminatorMap(["user" => User::class, "employee" => Employee::class])]
-#[ApiResource()]
+#[ApiResource(normalizationContext:['groups' => ['user:read']])]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['command:read'])]
+    #[Groups(['command:read', 'user:read'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 180)]
+    #[Groups(['user:read'])]
     private ?string $email = null;
 
     /**
      * @var list<string> The user roles
      */
     #[ORM\Column]
+    #[Groups(['user:read'])]
     private array $roles = [];
 
     /**
      * @var string The hashed password
      */
     #[ORM\Column]
+    #[Groups(['user:read'])]
     private ?string $password = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['command:read'])]
+    #[Groups(['command:read', 'user:read'])]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['command:read'])]
+    #[Groups(['command:read', 'user:read'])]
     private ?string $firstname = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['user:read'])]
     private ?string $adress = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     #[Context(normalizationContext: [DateTimeNormalizer::FORMAT_KEY => 'd/m/Y'])]
+    #[Groups(['user:read'])]
     private ?\DateTimeInterface $birthdate = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['user:read'])]
     private ?string $gender = null;
 
     /**
      * @var Collection<int, command>
      */
     #[ORM\OneToMany(targetEntity: command::class, mappedBy: 'user')]
+    #[Groups(['user:read'])]
     private Collection $commands;
 
     public function __construct()

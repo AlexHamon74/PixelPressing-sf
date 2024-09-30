@@ -18,32 +18,32 @@ class Command
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['command:read'])]
+    #[Groups(['command:read', 'user:read'])]
     private ?int $id = null;
 
     #[ORM\Column]
-    #[Groups(['command:read'])]
+    #[Groups(['command:read', 'user:read'])]
     private ?int $price = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['command:read'])]
+    #[Groups(['command:read', 'user:read'])]
     private ?string $status = null;
 
     #[ORM\Column]
-    #[Groups(['command:read'])]
+    #[Groups(['command:read', 'user:read'])]
     private ?bool $delivery = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     #[Context(normalizationContext: [DateTimeNormalizer::FORMAT_KEY => 'd/m/Y'])]
-    #[Groups(['command:read'])]
+    #[Groups(['command:read', 'user:read'])]
     private ?\DateTimeInterface $deliveryDate = null;
 
     #[ORM\Column]
-    #[Groups(['command:read'])]
+    #[Groups(['command:read', 'user:read'])]
     private array $commandItems = [];
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    #[Groups(['command:read'])]
+    #[Groups(['command:read', 'user:read'])]
     #[Context(normalizationContext: [DateTimeNormalizer::FORMAT_KEY => 'd/m/Y'])]
     private ?\DateTimeInterface $createdAt = null;
 
